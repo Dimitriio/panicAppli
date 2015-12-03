@@ -7,6 +7,7 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import model.User;
 
@@ -18,9 +19,12 @@ import org.java_websocket.server.WebSocketServer;
 import server.Document;
 
 public class Server_Socket extends WebSocketServer {
-		
-	public Server_Socket() throws UnknownHostException {
+	
+	private Document document;
+	
+	public Server_Socket(Document doc) throws UnknownHostException {
 		super();
+		this.document = doc;
 	}
 	
 	public Server_Socket(int port) throws UnknownHostException {
@@ -51,26 +55,14 @@ public class Server_Socket extends WebSocketServer {
 	@Override
 	public void onMessage(WebSocket conn, String message) {
 		System.out.println("message received from : " + conn);
-//		try {
-//			if(message.startsWith("cmd"))
-//				this.exe.getWriter().receiveCommand(message.replaceFirst("cmd",""));
-//			else if(message.startsWith("bloc"))
-//			{
-//				this.exe.getWriter().receiveBloc(message.replaceFirst("bloc",""));
-//			}
-//			else if(message.startsWith("chat"))
-//			{
-//				this.exe.getWriter().receiveChat(message);
-//				//message.replaceAll("(chat)(.*)","$2")
-//			}
-//			else{
-//				System.out.println("Non understood er general");
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		
+		StringTokenizer st = new StringTokenizer(message);
+		
+		Double x = Double.parseDouble(st.nextToken());
+		Double y = Double.parseDouble(st.nextToken());
+		
+		document.addUser(new User(x, y));
 	}
-	
 
 	@Override
 	public void onError(WebSocket conn, Exception ex) {
