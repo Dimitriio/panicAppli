@@ -1,13 +1,10 @@
 package krokette;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import model.User;
 
@@ -46,7 +43,6 @@ public class Server_Socket extends WebSocketServer {
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
 		System.out.println( conn + " has closed connection !" );
-		this.sendToAll("chatSomeone left the room...");
 	}
 
 	@Override
