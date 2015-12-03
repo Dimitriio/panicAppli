@@ -6,11 +6,16 @@ import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.Collection;
+import java.util.List;
+
+import model.User;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.WebSocketImpl;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+
+import server.Document;
 
 public class Server_Socket extends WebSocketServer {
 		
@@ -29,6 +34,12 @@ public class Server_Socket extends WebSocketServer {
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		System.out.println( conn.getRemoteSocketAddress().getAddress().getHostAddress() + " is connected !" );
+		
+		// Modèle métier
+		System.out.println("sending all users to website..");
+		Document doc = new Document();
+		this.sendAllUsers(doc.getUsersList());
+		
 	}
 
 	@Override
@@ -75,7 +86,23 @@ public class Server_Socket extends WebSocketServer {
 		}
 	}
 	
+	
+	private void sendAllUsers(List<User> list) {
+		Collection<WebSocket> connections = connections();
+		for(WebSocket w : connections){
+			for(int i =0 ; i < list.size() ; i++)
+			{
+				w.send("User n°"+i);
+				w.send("latitude : " + list.get(i).getLatitude());
+				w.send("longitude : " + list.get(i).getLongitude());
+			}
+			
+		}
+		
+	}
+	
 	public static void main(String[] args){
+		
 		WebSocketImpl.DEBUG = true;
 		int port = 8887;
 		System.out.println("Krokette online...");
@@ -83,28 +110,30 @@ public class Server_Socket extends WebSocketServer {
 			Server_Socket ss = new Server_Socket(port);
 			ss.start();
 			System.out.println("Server started on port : " + port);
-			
-			BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
-			while ( true ) {
-				String in = sysin.readLine();
-				ss.sendToAll( in );
-				if( in.equals( "exit" ) ) {
-					ss.stop();
-					break;
-				} else if( in.equals( "restart" ) ) {
-					ss.stop();
-					ss.start();
-					break;
-				}
-			}	
+
+//			BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
+//			while ( true ) {
+//				String in = sysin.readLine();
+//				ss.sendToAll( in );
+//				if( in.equals( "exit" ) ) {
+//					ss.stop();
+//					break;
+//				} else if( in.equals( "restart" ) ) {
+//					ss.stop();
+//					ss.start();
+//					break;
+//				}
+//			}	
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		} //catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 	}
+
+
 	
 	
 }
