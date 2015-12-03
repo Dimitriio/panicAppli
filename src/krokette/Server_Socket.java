@@ -19,12 +19,9 @@ import org.java_websocket.server.WebSocketServer;
 import server.Document;
 
 public class Server_Socket extends WebSocketServer {
-	
-	private Document document;
-	
-	public Server_Socket(Document doc) throws UnknownHostException {
+		
+	public Server_Socket() throws UnknownHostException {
 		super();
-		this.document = doc;
 	}
 	
 	public Server_Socket(int port) throws UnknownHostException {
@@ -55,13 +52,6 @@ public class Server_Socket extends WebSocketServer {
 	@Override
 	public void onMessage(WebSocket conn, String message) {
 		System.out.println("message received from : " + conn);
-		
-		StringTokenizer st = new StringTokenizer(message);
-		
-		Double x = Double.parseDouble(st.nextToken());
-		Double y = Double.parseDouble(st.nextToken());
-		
-		document.addUser(new User(x, y));
 	}
 
 	@Override
