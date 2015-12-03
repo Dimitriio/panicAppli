@@ -6,7 +6,7 @@ public class Main {
 	private ServerSide_Socket connection;
 	
 	public void server () {
-		int port = 8887;
+		int port = 9555;
 		try {
 			document = new Document();
 			connection = new ServerSide_Socket(port);
