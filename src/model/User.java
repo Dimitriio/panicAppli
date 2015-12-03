@@ -1,27 +1,27 @@
 package model;
 
 public class User {
-	private float latitude;
-	private float longitude;
+	private double latitude;
+	private double longitude;
 	
-	public User(float la, float lo){
-		this.latitude = la;
-		this.longitude = lo;
+	public User(double d, double e){
+		this.latitude = d;
+		this.longitude = e;
 	}
 	
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 	
-	public void setLatitude(float latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	
-	public float getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 	
-	public void setLongitude(float longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}	
 	
