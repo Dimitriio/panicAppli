@@ -47,7 +47,7 @@ public class Server_Socket extends WebSocketServer {
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
-		System.out.println("message received from : " + conn);
+		System.out.println("message received from : " + conn + message);
 	}
 
 	@Override
@@ -110,6 +110,10 @@ public class Server_Socket extends WebSocketServer {
 		} //catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
+	}
+
+	public void update() {
+		
 	}
 
 

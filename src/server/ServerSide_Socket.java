@@ -15,10 +15,12 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import server.Document;
+import krokette.Server_Socket;
 
 public class ServerSide_Socket extends WebSocketServer {
 	
 	private Document document;
+	private Server_Socket sock;
 	
 	public ServerSide_Socket() throws UnknownHostException {
 		super();
@@ -59,6 +61,8 @@ public class ServerSide_Socket extends WebSocketServer {
 		double lo = Double.parseDouble(st.nextToken());
 		
 		document.addUser(new User(la, lo));
+		
+		sock.update();
 	}
 
 	@Override
