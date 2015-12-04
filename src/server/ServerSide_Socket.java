@@ -50,10 +50,10 @@ public class ServerSide_Socket extends WebSocketServer {
 		
 		StringTokenizer st = new StringTokenizer(message);
 		
-		Double x = Double.parseDouble(st.nextToken());
-		Double y = Double.parseDouble(st.nextToken());
+		Double la = Double.parseDouble(st.nextToken());
+		Double lo = Double.parseDouble(st.nextToken());
 		
-		document.addUser(new User(x, y));
+		document.addUser(new User(la, lo));
 	}
 
 	@Override
