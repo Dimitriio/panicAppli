@@ -62,7 +62,7 @@ public class ServerSide_Socket extends WebSocketServer {
 		
 		document.addUser(new User(la, lo));
 		
-		sock.update();
+		sock.update(new User(la,lo));
 	}
 
 	@Override
