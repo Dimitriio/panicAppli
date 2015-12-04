@@ -2,7 +2,7 @@ package server;
 
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main implements Runnable{
 	
 	private Document document;
 	private ServerSide_Socket connection;
@@ -19,9 +19,13 @@ public class Main {
 		}
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Main m = new Main();
 		m.server();
+	}*/
+
+	public void run() {
+		this.server();
 	}
 
 }

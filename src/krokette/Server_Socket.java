@@ -15,7 +15,7 @@ import org.java_websocket.server.WebSocketServer;
 
 import server.Document;
 
-public class Server_Socket extends WebSocketServer {
+public class Server_Socket extends WebSocketServer{
 		
 	Document doc = new Document();
 	
@@ -92,8 +92,8 @@ public class Server_Socket extends WebSocketServer {
 		}
 		
 	}
-	
-	public static void main(String[] args){
+		
+	/*public static void main(String[] args){
 		
 		WebSocketImpl.DEBUG = true;
 		int port = 8887;
@@ -123,7 +123,7 @@ public class Server_Socket extends WebSocketServer {
 		} //catch (InterruptedException e) {
 //			e.printStackTrace();
 //		}
-	}
+	}*/
 
 	public void update(User user) {
 		this.sendUpdate(user);
