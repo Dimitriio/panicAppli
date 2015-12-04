@@ -30,9 +30,10 @@ public class ServerSide_Socket extends WebSocketServer {
 		super(new InetSocketAddress( port ));
 	}
 	
-	public ServerSide_Socket(int port, Document doc) throws UnknownHostException {
+	public ServerSide_Socket(int port, Document doc, Server_Socket ss) throws UnknownHostException {
 		super(new InetSocketAddress( port ));
 		this.document = doc;
+		this.sock = ss;
 	}
 	
 	public ServerSide_Socket(InetSocketAddress address) {
@@ -62,7 +63,7 @@ public class ServerSide_Socket extends WebSocketServer {
 		
 		document.addUser(new User(la, lo));
 		
-		sock.update(new User(la,lo));
+		sock.sendUpdate(new User(la,lo));
 	}
 
 	@Override

@@ -81,7 +81,8 @@ public class Server_Socket extends WebSocketServer{
 		
 	}
 	
-	private void sendUpdate(User user) {
+	public void sendUpdate(User user) {
+		System.out.println("sending updates..");
 		Collection<WebSocket> connections = connections();
 		for(WebSocket w : connections){
 
@@ -125,9 +126,6 @@ public class Server_Socket extends WebSocketServer{
 //		}
 	}*/
 
-	public void update(User user) {
-		this.sendUpdate(user);
-	}
 
 
 	
