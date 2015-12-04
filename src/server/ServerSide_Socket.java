@@ -20,13 +20,17 @@ public class ServerSide_Socket extends WebSocketServer {
 	
 	private Document document;
 	
-	public ServerSide_Socket(Document doc) throws UnknownHostException {
+	public ServerSide_Socket() throws UnknownHostException {
 		super();
-		this.document = doc;
 	}
 	
 	public ServerSide_Socket(int port) throws UnknownHostException {
 		super(new InetSocketAddress( port ));
+	}
+	
+	public ServerSide_Socket(int port, Document doc) throws UnknownHostException {
+		super(new InetSocketAddress( port ));
+		this.document = doc;
 	}
 	
 	public ServerSide_Socket(InetSocketAddress address) {
@@ -47,11 +51,12 @@ public class ServerSide_Socket extends WebSocketServer {
 	@Override
 	public void onMessage(WebSocket conn, String message) {
 		System.out.println("message received from : " + conn);
+		System.out.println("coordinates received : " + message);
 		
 		StringTokenizer st = new StringTokenizer(message);
 		
-		Double la = Double.parseDouble(st.nextToken());
-		Double lo = Double.parseDouble(st.nextToken());
+		double la = Double.parseDouble(st.nextToken());
+		double lo = Double.parseDouble(st.nextToken());
 		
 		document.addUser(new User(la, lo));
 	}

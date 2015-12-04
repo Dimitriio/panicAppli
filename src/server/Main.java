@@ -1,5 +1,7 @@
 package server;
 
+import java.util.StringTokenizer;
+
 public class Main {
 	
 	private Document document;
@@ -9,7 +11,7 @@ public class Main {
 		int port = 9555;
 		try {
 			document = new Document();
-			connection = new ServerSide_Socket(port);
+			connection = new ServerSide_Socket(port, document);
 			connection.start();
 			System.out.println("Server started on port : " + port);
 		} catch (Exception e) {
