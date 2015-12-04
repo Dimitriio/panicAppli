@@ -17,6 +17,8 @@ import server.Document;
 
 public class Server_Socket extends WebSocketServer {
 		
+	Document doc = new Document();
+	
 	public Server_Socket() throws UnknownHostException {
 		super();
 	}
@@ -35,8 +37,7 @@ public class Server_Socket extends WebSocketServer {
 		
 		// Modèle métier
 		System.out.println("sending all users to website..");
-		Document doc = new Document();
-		this.sendAllUsers(doc.getUsersList());
+		this.sendAllUsers(doc.getUsers());
 		
 	}
 
@@ -80,6 +81,18 @@ public class Server_Socket extends WebSocketServer {
 		
 	}
 	
+	private void sendUpdate(User user) {
+		Collection<WebSocket> connections = connections();
+		for(WebSocket w : connections){
+
+			w.send("New user");
+			w.send("latitude : " + user.getLatitude());
+			w.send("longitude : " + user.getLongitude());
+
+		}
+		
+	}
+	
 	public static void main(String[] args){
 		
 		WebSocketImpl.DEBUG = true;
@@ -112,8 +125,8 @@ public class Server_Socket extends WebSocketServer {
 //		}
 	}
 
-	public void update() {
-		
+	public void update(User user) {
+		this.sendUpdate(user);
 	}
 
 
